@@ -1,0 +1,21 @@
+### Create Customer
+POST http://localhost:5000/api/customers
+Content-Type: application/json
+
+{
+  "name": "Ahmed Ali",
+  "email": "ahmed-ali22@example.com",
+  "phone": "1234567890"
+}
+
+### Create Order
+POST http://localhost:5000/api/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "productIds": [1, 2]
+}
+
+### Update Order Status
+POST http://localhost:5000/api/orders/updateOrderStatus/1
