@@ -6,8 +6,10 @@
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } = null!;
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
-        public string Status { get; set; } = "Pending";
+        public string Status { get; set; } = OrderStatus.Pending.ToString();
         public double TotalPrice { get; set; }
         public List<OrderProduct> OrderProducts { get; set; } = new();
     }
+    enum OrderStatus { Pending, Delivered }
+
 }

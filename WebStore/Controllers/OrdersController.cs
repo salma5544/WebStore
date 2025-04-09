@@ -29,11 +29,15 @@ namespace WebStore.Controllers
             var products = await _context.Products.Where(p => request.ProductIds.Contains(p.Id)).ToListAsync();
             if (!products.Any()) return BadRequest("Invalid product selection.");
 
+            var outOfStock = products.Where(p => p.Stock <= 0).Select(p => p.Name).ToList();
+            if (outOfStock.Any())
+                return BadRequest($"The following product(s) are out of stock: {string.Join(", ", outOfStock)}");
+
             var order = new Order
             {
                 CustomerId = request.CustomerId,
                 OrderDate = DateTime.UtcNow,
-                Status = "Pending",
+                Status = OrderStatus.Pending.ToString(),
                 TotalPrice = products.Sum(p => p.Price),
                 OrderProducts = products.Select(p => new OrderProduct { ProductId = p.Id }).ToList()
             };
@@ -73,7 +77,7 @@ namespace WebStore.Controllers
                                              .FirstOrDefaultAsync(o => o.Id == id);
             if (order == null) return NotFound("Order not found");
 
-            order.Status = "Delivered";
+            order.Status = OrderStatus.Delivered.ToString();
             foreach (var op in order.OrderProducts)
             {
                 op.Product.Stock -= 1;
