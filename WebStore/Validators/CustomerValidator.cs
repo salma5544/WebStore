@@ -8,7 +8,8 @@ namespace WebStore.Validators
         public CustomerValidator()
         {
             RuleFor(c => c.Name).NotEmpty();
-            RuleFor(c => c.Email).NotEmpty().EmailAddress();
+            RuleFor(c => c.Email).NotEmpty().EmailAddress().Matches(@"^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$").WithMessage("Invalid email format.");
+
         }
     }
 }

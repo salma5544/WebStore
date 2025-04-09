@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using WebStore.Models;
+using WebStore.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

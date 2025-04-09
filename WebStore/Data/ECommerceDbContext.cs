@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebStore.Models;
 
-namespace WebStore.Models
+namespace WebStore.Data
 {
     public class ECommerceDbContext : DbContext
     {
