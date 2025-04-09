@@ -14,7 +14,7 @@ namespace WebStore.Controllers
         public CustomersController(ECommerceDbContext context) => _context = context;
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(await _context.Customers.ToListAsync());
+        public async Task<IActionResult> Get() => Ok(await _context.Customers.AsNoTracking().ToListAsync());
 
         [Route("Create")]
         [HttpPost]
